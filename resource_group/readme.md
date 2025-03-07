@@ -2,6 +2,26 @@
 
 This module is used to create an Azure Resource Group.
 
+## Providers
+
+| Name   | Version |
+|--------|---------|
+| `azurerm` | >= 2.0 |
+
+This module requires the `azurerm` provider to interact with Azure resources. Ensure you have the provider configured in your Terraform project.
+
+## Module Source
+
+The source for this module can be found on GitHub at the following location:
+
+[achs-tf-modules/resource_group](https://github.com/your-repo/achs-tf-modules/resource_group)
+
+You can include this module in your Terraform configuration using the following source address:
+
+```hcl
+source = "github.com/your-repo/achs-tf-modules/resource_group"
+```
+
 ## Usage
 This module can be used to create a resource group in Azure. Below is an example of how to use this module in your Terraform configuration:
 
