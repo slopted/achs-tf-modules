@@ -2,11 +2,19 @@
 variable "prefix" {
     description = "The prefix for naming convention"
     type        = string
+    default     = "rg"
+    nullable = false
 }
 
 variable "environment" {
     description = "The environment for the resources"
     type        = string
+    nullable = false
+    validation {
+        condition     = contains(["prod", "dev", "test", "poc"], var.environment)
+        error_message = "The environment must be one of 'prod', 'dev', 'test', or 'poc'."
+    }
+
 }
 
 variable "cost_center" {
@@ -36,21 +44,6 @@ variable "location" {
 }
 
 # Resource Group Variables
-
-variable "name" {
-  type        = string
-  description = "Required. The name of the this resource."
-
-  validation {
-    condition     = can(regex("^[a-zA-Z0-9_().-]{1,89}[a-zA-Z0-9_()-]$", var.name))
-    error_message = <<ERROR_MESSAGE
-    The resource group name must meet the following requirements:
-    - `Between 1 and 90 characters long.` 
-    - `Can only contain Alphanumerics, underscores, parentheses, hyphens, periods.`
-    - `Cannot end in a period`
-    ERROR_MESSAGE
-  }
-}
 
 variable "enable_telemetry" {
   type        = bool
@@ -164,11 +157,4 @@ DESCRIPTION
          - Using the role name: Reader | "Storage Blob Data Reader"
       ERROR_MESSAGE
   }
-}
-
-# tflint-ignore: terraform_unused_declarations
-variable "tags" {
-  type        = map(string)
-  default     = null
-  description = "(Optional) Tags of the resource."
 }
